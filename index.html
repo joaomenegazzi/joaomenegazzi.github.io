@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>João Menegazzi – Engenheiro de Software</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;700;800&family=DM+Mono:wght@300;400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/devicons/devicon@v2.15.1/devicon.min.css">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --bg: #0a0a0c; --bg2: #111116;
+    --border: rgba(255,255,255,0.07); --border2: rgba(255,255,255,0.13);
+    --text: #f0ede8; --muted: #888680;
+    --accent: #5DCAA5; --accent2: #AFA9EC; --accent3: #F0997B; --accent4: #EF9F27;
+    --card-bg: #13131a;
+  }
+  html { scroll-behavior: smooth; }
+  body { background: var(--bg); color: var(--text); font-family: 'Syne', sans-serif; min-height: 100vh; overflow-x: hidden; }
+
+  /* NAV */
+  nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; display: flex; justify-content: space-between; align-items: center; padding: 1.25rem 3rem; background: rgba(10,10,12,0.85); backdrop-filter: blur(12px); border-bottom: 1px solid var(--border); }
+  .nav-logo { font-size: 14px; font-weight: 700; letter-spacing: 0.08em; color: var(--accent); font-family: 'DM Mono', monospace; }
+  .nav-links { display: flex; gap: 2rem; }
+  .nav-links a { font-size: 13px; color: var(--muted); text-decoration: none; letter-spacing: 0.05em; transition: color 0.2s; }
+  .nav-links a:hover { color: var(--text); }
+
+  section { position: relative; z-index: 1; }
+
+  /* HERO */
+  .hero {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    padding: 8rem 3rem 4rem;
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+  .hero-inner {
+    max-width: 720px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0;
+  }
+  .hero-photo {
+    width: 110px;
+    height: 110px;
+    border-radius: 50%;
+    object-fit: cover;
+    object-position: center top;
+    border: 2px solid rgba(93,202,165,0.4);
+    margin-bottom: 1.75rem;
+    flex-shrink: 0;
+  }
+  .hero-tag {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 11px;
+    font-family: 'DM Mono', monospace;
+    color: var(--accent);
+    letter-spacing: 0.12em;
+    background: rgba(93,202,165,0.08);
+    border: 1px solid rgba(93,202,165,0.2);
+    padding: 5px 14px;
+    border-radius: 100px;
+    margin-bottom: 1.5rem;
+  }
+  .hero-tag::before { content: ''; width: 6px; height: 6px; background: var(--accent); border-radius: 50%; animation: pulse 2s infinite; }
+  @keyframes pulse { 0%,100%{opacity:1;transform:scale(1)} 50%{opacity:0.5;transform:scale(0.8)} }
+  .hero h1 { font-size: clamp(3rem, 7vw, 5.5rem); font-weight: 800; line-height: 1.0; letter-spacing: -0.03em; margin-bottom: 1.5rem; }
+  .hero h1 span { color: var(--accent2); }
+  .hero-desc { font-size: 17px; line-height: 1.7; color: var(--muted); max-width: 560px; margin-bottom: 2.5rem; }
+  .hero-ctas { display: flex; gap: 1rem; flex-wrap: wrap; }
+  .btn-primary { display: inline-flex; align-items: center; gap: 8px; background: var(--accent); color: #0a0a0c; font-family: 'Syne', sans-serif; font-weight: 700; font-size: 13px; letter-spacing: 0.05em; padding: 12px 24px; border-radius: 8px; text-decoration: none; transition: opacity 0.2s, transform 0.2s; }
+  .btn-primary:hover { opacity: 0.85; transform: translateY(-1px); }
+  .btn-outline { display: inline-flex; align-items: center; gap: 8px; background: transparent; color: var(--text); font-family: 'Syne', sans-serif; font-weight: 500; font-size: 13px; padding: 12px 24px; border-radius: 8px; border: 1px solid var(--border2); text-decoration: none; transition: border-color 0.2s, transform 0.2s; }
+  .btn-outline:hover { border-color: rgba(255,255,255,0.3); transform: translateY(-1px); }
+
+  /* DIVIDER */
+  .divider { height: 1px; background: var(--border); margin: 0 3rem; }
+
+  /* SECTIONS */
+  .section-wrap { max-width: 1100px; margin: 0 auto; padding: 6rem 3rem; }
+  .section-label { font-size: 11px; font-family: 'DM Mono', monospace; letter-spacing: 0.15em; color: var(--accent); margin-bottom: 3rem; display: flex; align-items: center; gap: 12px; }
+  .section-label::after { content: ''; flex: 0 0 40px; height: 1px; background: var(--accent); opacity: 0.4; }
+
+  /* ABOUT */
+  .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: start; }
+  .about-text h2 { font-size: 2.4rem; font-weight: 800; letter-spacing: -0.02em; margin-bottom: 1.5rem; line-height: 1.1; }
+  .about-text p { font-size: 15px; line-height: 1.8; color: var(--muted); margin-bottom: 1rem; }
+  .about-text p strong { color: var(--text); font-weight: 500; }
+  .about-stats { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+  .stat-card { background: var(--card-bg); border: 1px solid var(--border); border-radius: 12px; padding: 1.5rem; }
+  .stat-num { font-size: 2.2rem; font-weight: 800; letter-spacing: -0.03em; line-height: 1; margin-bottom: 0.4rem; }
+  .stat-num.teal { color: var(--accent); } .stat-num.purple { color: var(--accent2); } .stat-num.coral { color: var(--accent3); }
+  .stat-label { font-size: 12px; color: var(--muted); letter-spacing: 0.04em; }
+
+  /* STACK */
+  .stack-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 1rem; }
+  .stack-item { background: var(--card-bg); border: 1px solid var(--border); border-radius: 10px; padding: 1.2rem 1.4rem; transition: border-color 0.2s, transform 0.2s; }
+  .stack-item:hover { border-color: var(--border2); transform: translateY(-3px); }
+  .stack-icon { font-size: 26px; margin-bottom: 10px; display: flex; align-items: center; }
+  .stack-name { font-size: 13px; font-weight: 700; margin-bottom: 4px; }
+  .stack-desc { font-size: 11px; color: var(--muted); line-height: 1.5; font-family: 'DM Mono', monospace; }
+  .icon-python { color: #3572A5; }
+  .icon-csharp { color: #9B4F96; }
+  .icon-excel { color: #217346; }
+  .icon-autocad { color: #E51937; }
+  .icon-db { color: #F0997B; }
+  .icon-ai { color: #AFA9EC; }
+
+  /* PROJECTS */
+  .projects-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1.5rem; }
+  .project-card { background: var(--card-bg); border: 1px solid var(--border); border-radius: 16px; padding: 2rem; position: relative; overflow: hidden; transition: border-color 0.2s, transform 0.2s; }
+  .project-card:hover { border-color: var(--border2); transform: translateY(-4px); }
+  .project-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px; }
+  .project-card.teal::before { background: linear-gradient(90deg, var(--accent), transparent); }
+  .project-card.purple::before { background: linear-gradient(90deg, var(--accent2), transparent); }
+  .project-card.coral::before { background: linear-gradient(90deg, var(--accent3), transparent); }
+  .project-card.amber::before { background: linear-gradient(90deg, var(--accent4), transparent); }
+  .project-year { font-size: 10px; font-family: 'DM Mono', monospace; color: var(--muted); letter-spacing: 0.1em; margin-bottom: 0.75rem; }
+  .project-status { display: inline-flex; align-items: center; gap: 6px; font-size: 10px; font-family: 'DM Mono', monospace; padding: 3px 10px; border-radius: 100px; margin-bottom: 1rem; letter-spacing: 0.06em; }
+  .status-done { background: rgba(93,202,165,0.1); color: var(--accent); border: 1px solid rgba(93,202,165,0.2); }
+  .status-wip { background: rgba(239,159,39,0.1); color: var(--accent4); border: 1px solid rgba(239,159,39,0.2); }
+  .status-dot { width: 5px; height: 5px; border-radius: 50%; background: currentColor; }
+  .status-wip .status-dot { animation: pulse 2s infinite; }
+  .project-card h3 { font-size: 18px; font-weight: 800; margin-bottom: 0.75rem; letter-spacing: -0.01em; }
+  .project-card p { font-size: 13px; line-height: 1.7; color: var(--muted); margin-bottom: 1.5rem; }
+  .project-tags { display: flex; flex-wrap: wrap; gap: 6px; }
+  .tag { font-size: 10px; font-family: 'DM Mono', monospace; background: rgba(255,255,255,0.05); border: 1px solid var(--border2); border-radius: 4px; padding: 3px 8px; color: var(--muted); }
+
+  /* EXPERIENCE */
+  .exp-item { display: grid; grid-template-columns: 200px 1fr; gap: 3rem; padding: 2.5rem 0; border-bottom: 1px solid var(--border); }
+  .exp-item:last-child { border-bottom: none; }
+  .exp-date { font-size: 12px; font-family: 'DM Mono', monospace; color: var(--muted); padding-top: 4px; }
+  .exp-company { font-size: 17px; font-weight: 700; margin-bottom: 0.25rem; }
+  .exp-role { font-size: 13px; color: var(--accent); font-family: 'DM Mono', monospace; margin-bottom: 1rem; letter-spacing: 0.05em; }
+  .exp-list { list-style: none; }
+  .exp-list li { font-size: 13px; color: var(--muted); line-height: 1.7; padding-left: 1.2rem; position: relative; margin-bottom: 6px; }
+  .exp-list li::before { content: '–'; position: absolute; left: 0; color: var(--accent); opacity: 0.5; }
+
+  /* CONTACT */
+  .contact-wrap { background: var(--bg2); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
+  .contact-inner { max-width: 1100px; margin: 0 auto; padding: 6rem 3rem; }
+  .contact-inner h2 { font-size: 3rem; font-weight: 800; letter-spacing: -0.03em; margin-bottom: 1rem; }
+  .contact-inner h2 span { color: var(--accent); }
+  .contact-inner p { font-size: 15px; color: var(--muted); margin-bottom: 2.5rem; max-width: 500px; line-height: 1.7; }
+  .contact-links { display: flex; gap: 1rem; flex-wrap: wrap; }
+  .contact-link { display: inline-flex; align-items: center; gap: 8px; background: var(--card-bg); border: 1px solid var(--border2); border-radius: 8px; padding: 10px 20px; font-size: 13px; font-family: 'DM Mono', monospace; color: var(--text); text-decoration: none; transition: border-color 0.2s, transform 0.2s; }
+  .contact-link:hover { border-color: rgba(255,255,255,0.3); transform: translateY(-2px); }
+
+  footer { max-width: 1100px; margin: 0 auto; padding: 2rem 3rem; display: flex; justify-content: space-between; align-items: center; font-size: 12px; font-family: 'DM Mono', monospace; color: var(--muted); }
+
+  @media (max-width: 700px) {
+    nav { padding: 1rem 1.5rem; } .nav-links { gap: 1rem; }
+    .hero { padding: 7rem 1.5rem 3rem; } .section-wrap { padding: 4rem 1.5rem; }
+    .about-grid { grid-template-columns: 1fr; gap: 2.5rem; }
+    .exp-item { grid-template-columns: 1fr; gap: 0.5rem; }
+    footer { flex-direction: column; gap: 0.5rem; padding: 1.5rem; text-align: center; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-logo">JM.dev</div>
+  <div class="nav-links">
+    <a href="#sobre">sobre</a>
+    <a href="#stack">stack</a>
+    <a href="#projetos">projetos</a>
+    <a href="#contato">contato</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero" id="home">
+  <div class="hero-inner">
+    <img src="Foto_CV.png" alt="João Menegazzi" class="hero-photo">
+    <div class="hero-tag">disponível para estágio</div>
+    <h1>João<br><span>Menegazzi</span></h1>
+    <p class="hero-desc">Estudante de Engenharia de Software construindo sistemas reais — de automação agrícola a aplicativos multiplataforma. Ijuí/RS.</p>
+    <div class="hero-ctas">
+      <a href="#projetos" class="btn-primary">Ver projetos →</a>
+      <a href="#contato" class="btn-outline">Entrar em contato</a>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- SOBRE -->
+<section id="sobre">
+  <div class="section-wrap">
+    <div class="section-label">01 — SOBRE</div>
+    <div class="about-grid">
+      <div class="about-text">
+        <h2>Tecnologia<br>aplicada ao<br>mundo real.</h2>
+        <p>Sou estudante de <strong>Engenharia de Software</strong> na Uninter, com experiência prática desde 2023 desenvolvendo sistemas que resolvem problemas concretos — da automação de levantamento de materiais no AutoCAD ao controle inteligente de irrigação.</p>
+        <p>Combino desenvolvimento de software com visão de gestão de projetos, sempre buscando soluções que unem eficiência e tecnologia.</p>
+      </div>
+      <div class="about-stats">
+        <div class="stat-card"><div class="stat-num teal">2+</div><div class="stat-label">anos de experiência</div></div>
+        <div class="stat-card"><div class="stat-num purple">4</div><div class="stat-label">projetos ativos</div></div>
+        <div class="stat-card" style="grid-column: span 2;"><div class="stat-num coral">Python · C# · VBA</div><div class="stat-label">principais linguagens</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- STACK -->
+<section id="stack">
+  <div class="section-wrap">
+    <div class="section-label">02 — STACK TÉCNICO</div>
+    <div class="stack-grid">
+      <div class="stack-item">
+        <div class="stack-icon"><i class="fa-brands fa-python icon-python"></i></div>
+        <div class="stack-name">Python</div>
+        <div class="stack-desc">automação · machine learning · scripts</div>
+      </div>
+      <div class="stack-item">
+        <div class="stack-icon"><i class="devicon-csharp-plain icon-csharp"></i></div>
+        <div class="stack-name">C# / .NET MAUI</div>
+        <div class="stack-desc">apps multiplataforma · desktop · mobile</div>
+      </div>
+      <div class="stack-item">
+        <div class="stack-icon"><i class="fa-solid fa-table icon-excel"></i></div>
+        <div class="stack-name">Excel + VBA</div>
+        <div class="stack-desc">automação · relatórios · orçamentos</div>
+      </div>
+      <div class="stack-item">
+        <div class="stack-icon"><i class="fa-solid fa-drafting-compass icon-autocad"></i></div>
+        <div class="stack-name">AutoCAD</div>
+        <div class="stack-desc">projetos técnicos · automação DWG</div>
+      </div>
+      <div class="stack-item">
+        <div class="stack-icon"><i class="fa-solid fa-database icon-db"></i></div>
+        <div class="stack-name">Banco de Dados</div>
+        <div class="stack-desc">integração · relatórios · persistência</div>
+      </div>
+      <div class="stack-item">
+        <div class="stack-icon"><i class="fa-solid fa-brain icon-ai"></i></div>
+        <div class="stack-name">Machine Learning</div>
+        <div class="stack-desc">aprendizado supervisionado · classificação</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- PROJETOS -->
+<section id="projetos">
+  <div class="section-wrap">
+    <div class="section-label">03 — PROJETOS</div>
+    <div class="projects-grid">
+
+      <div class="project-card teal">
+        <div class="project-year">2024</div>
+        <div class="project-status status-done"><span class="status-dot"></span> concluído</div>
+        <h3>Script IrriAgro — AutoCAD → CSV</h3>
+        <p>Script Python que lê automaticamente blocos e atributos de projetos de irrigação no AutoCAD, identifica peças, códigos e quantidades, e exporta uma lista de materiais em CSV — eliminando o levantamento manual.</p>
+        <div class="project-tags">
+          <span class="tag">Python</span><span class="tag">AutoCAD</span><span class="tag">CSV</span><span class="tag">Automação</span>
+        </div>
+      </div>
+
+      <div class="project-card purple">
+        <div class="project-year">2025</div>
+        <div class="project-status status-done"><span class="status-dot"></span> concluído</div>
+        <h3>Sistema de Treinamento de IA</h3>
+        <p>Modelo de IA para geração e classificação de amostras de dados com aprendizado supervisionado, aplicado a contextos agrícolas e administrativos.</p>
+        <div class="project-tags">
+          <span class="tag">Python</span><span class="tag">ML Supervisionado</span><span class="tag">Agro-Tech</span>
+        </div>
+      </div>
+
+      <div class="project-card amber">
+        <div class="project-year">2024 — presente</div>
+        <div class="project-status status-wip"><span class="status-dot"></span> em desenvolvimento</div>
+        <h3>IrriAgro Inteligente</h3>
+        <p>Sistema completo de controle e otimização de irrigação com banco de dados, automação de relatórios e interface multiplataforma em .NET MAUI.</p>
+        <div class="project-tags">
+          <span class="tag">Python</span><span class="tag">.NET MAUI</span><span class="tag">Banco de Dados</span><span class="tag">Automação</span>
+        </div>
+      </div>
+
+      <div class="project-card coral">
+        <div class="project-year">2024 — presente</div>
+        <div class="project-status status-wip"><span class="status-dot"></span> em desenvolvimento</div>
+        <h3>Obsidian + To-Do</h3>
+        <p>Aplicativo multiplataforma de produtividade com importação de tarefas via Excel e interface minimalista para gerenciamento de projetos pessoais.</p>
+        <div class="project-tags">
+          <span class="tag">C#</span><span class="tag">.NET MAUI</span><span class="tag">Excel</span><span class="tag">Cross-platform</span>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- EXPERIÊNCIA -->
+<section id="experiencia">
+  <div class="section-wrap">
+    <div class="section-label">04 — EXPERIÊNCIA</div>
+    <div class="exp-item">
+      <div><div class="exp-date">Jan/2023 — 2025</div></div>
+      <div>
+        <div class="exp-company">Irriagro Sistemas de Irrigação</div>
+        <div class="exp-role">projetista / suporte técnico e administrativo</div>
+        <ul class="exp-list">
+          <li>Desenvolvimento de script Python para extração automática de peças do AutoCAD (DWG → CSV)</li>
+          <li>Automação de planilhas de orçamento com Excel avançado e macros VBA</li>
+          <li>Desenvolvimento de sistemas internos com Python e .NET MAUI</li>
+          <li>Planejamento e acompanhamento de projetos agrícolas</li>
+          <li>Gestão de fornecedores e controle de logística de materiais</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTATO -->
+<div class="contact-wrap" id="contato">
+  <div class="contact-inner">
+    <div class="section-label">05 — CONTATO</div>
+    <h2>Vamos <span>trabalhar</span><br>juntos?</h2>
+    <p>Estou disponível para estágio em desenvolvimento de software, automação e tecnologia. Baseado em Ijuí/RS.</p>
+    <div class="contact-links">
+      <a href="mailto:joaomenegazzi368@gmail.com" class="contact-link">
+        <i class="fa-solid fa-envelope" style="color:var(--accent)"></i>
+        joaomenegazzi368@gmail.com
+      </a>
+      <a href="https://linkedin.com/in/joaomenegazzi" class="contact-link" target="_blank">
+        <i class="fa-brands fa-linkedin" style="color:var(--accent2)"></i>
+        linkedin/joaomenegazzi
+      </a>
+      <a href="https://github.com/joaomenegazzi" class="contact-link" target="_blank">
+        <i class="fa-brands fa-github" style="color:var(--accent3)"></i>
+        github/joaomenegazzi
+      </a>
+      <a href="tel:+5555991451515" class="contact-link">
+        <i class="fa-solid fa-phone" style="color:var(--muted)"></i>
+        (55) 9 9145-1515
+      </a>
+    </div>
+  </div>
+</div>
+
+<footer>
+  <span>© 2025 João Pedro dos Santos Menegazzi</span>
+  <span>Ijuí · RS · Brasil</span>
+</footer>
+
+</body>
+</html>
